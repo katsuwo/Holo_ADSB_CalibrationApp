@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		063806243E87484F6D502A58 /* Pods_Holo_ADSB_CalibrationApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0E6A85E69CB19915D65FABA /* Pods_Holo_ADSB_CalibrationApp.framework */; };
 		A16EE0932221D92900E79D8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16EE0922221D92900E79D8A /* AppDelegate.swift */; };
 		A16EE0952221D92900E79D8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16EE0942221D92900E79D8A /* ViewController.swift */; };
 		A16EE0982221D92900E79D8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16EE0962221D92900E79D8A /* Main.storyboard */; };
 		A16EE09A2221D92900E79D8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A16EE0992221D92900E79D8A /* Assets.xcassets */; };
 		A16EE09D2221D92900E79D8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16EE09B2221D92900E79D8A /* LaunchScreen.storyboard */; };
+		A16EE0A52221DB9900E79D8A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16EE0A42221DB9900E79D8A /* CoreLocation.framework */; };
+		A16EE0AA2221DDA300E79D8A /* CurrentPoint.psd in Resources */ = {isa = PBXBuildFile; fileRef = A16EE0A62221DDA200E79D8A /* CurrentPoint.psd */; };
+		A16EE0AB2221DDA300E79D8A /* CalibratePoint.png in Resources */ = {isa = PBXBuildFile; fileRef = A16EE0A72221DDA200E79D8A /* CalibratePoint.png */; };
+		A16EE0AC2221DDA300E79D8A /* CalibratePoint.psd in Resources */ = {isa = PBXBuildFile; fileRef = A16EE0A82221DDA200E79D8A /* CalibratePoint.psd */; };
+		A16EE0AD2221DDA300E79D8A /* CurrentPoint.png in Resources */ = {isa = PBXBuildFile; fileRef = A16EE0A92221DDA300E79D8A /* CurrentPoint.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		70DC11FEA8BD0B380AB9AAD4 /* Pods-Holo_ADSB_CalibrationApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holo_ADSB_CalibrationApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Holo_ADSB_CalibrationApp/Pods-Holo_ADSB_CalibrationApp.debug.xcconfig"; sourceTree = "<group>"; };
+		811F880600F498E07741DD82 /* Pods-Holo_ADSB_CalibrationApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holo_ADSB_CalibrationApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Holo_ADSB_CalibrationApp/Pods-Holo_ADSB_CalibrationApp.release.xcconfig"; sourceTree = "<group>"; };
 		A16EE08F2221D92900E79D8A /* Holo_ADSB_CalibrationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holo_ADSB_CalibrationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16EE0922221D92900E79D8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A16EE0942221D92900E79D8A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +30,12 @@
 		A16EE0992221D92900E79D8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A16EE09C2221D92900E79D8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A16EE09E2221D92900E79D8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A16EE0A42221DB9900E79D8A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A16EE0A62221DDA200E79D8A /* CurrentPoint.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = CurrentPoint.psd; sourceTree = "<group>"; };
+		A16EE0A72221DDA200E79D8A /* CalibratePoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalibratePoint.png; sourceTree = "<group>"; };
+		A16EE0A82221DDA200E79D8A /* CalibratePoint.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = CalibratePoint.psd; sourceTree = "<group>"; };
+		A16EE0A92221DDA300E79D8A /* CurrentPoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CurrentPoint.png; sourceTree = "<group>"; };
+		D0E6A85E69CB19915D65FABA /* Pods_Holo_ADSB_CalibrationApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Holo_ADSB_CalibrationApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +43,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A16EE0A52221DB9900E79D8A /* CoreLocation.framework in Frameworks */,
+				063806243E87484F6D502A58 /* Pods_Holo_ADSB_CalibrationApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		394B829176972E2889515F6A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				70DC11FEA8BD0B380AB9AAD4 /* Pods-Holo_ADSB_CalibrationApp.debug.xcconfig */,
+				811F880600F498E07741DD82 /* Pods-Holo_ADSB_CalibrationApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A16EE0862221D92900E79D8A = {
 			isa = PBXGroup;
 			children = (
 				A16EE0912221D92900E79D8A /* Holo_ADSB_CalibrationApp */,
 				A16EE0902221D92900E79D8A /* Products */,
+				394B829176972E2889515F6A /* Pods */,
+				BAC1A032DD1C33E31EA8F705 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +81,10 @@
 		A16EE0912221D92900E79D8A /* Holo_ADSB_CalibrationApp */ = {
 			isa = PBXGroup;
 			children = (
+				A16EE0A72221DDA200E79D8A /* CalibratePoint.png */,
+				A16EE0A82221DDA200E79D8A /* CalibratePoint.psd */,
+				A16EE0A92221DDA300E79D8A /* CurrentPoint.png */,
+				A16EE0A62221DDA200E79D8A /* CurrentPoint.psd */,
 				A16EE0922221D92900E79D8A /* AppDelegate.swift */,
 				A16EE0942221D92900E79D8A /* ViewController.swift */,
 				A16EE0962221D92900E79D8A /* Main.storyboard */,
@@ -64,6 +95,15 @@
 			path = Holo_ADSB_CalibrationApp;
 			sourceTree = "<group>";
 		};
+		BAC1A032DD1C33E31EA8F705 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A16EE0A42221DB9900E79D8A /* CoreLocation.framework */,
+				D0E6A85E69CB19915D65FABA /* Pods_Holo_ADSB_CalibrationApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +111,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A16EE0A12221D92900E79D8A /* Build configuration list for PBXNativeTarget "Holo_ADSB_CalibrationApp" */;
 			buildPhases = (
+				FC328099FAD6268B287A463D /* [CP] Check Pods Manifest.lock */,
 				A16EE08B2221D92900E79D8A /* Sources */,
 				A16EE08C2221D92900E79D8A /* Frameworks */,
 				A16EE08D2221D92900E79D8A /* Resources */,
+				7C9D2E9B30BEBEC5ABC3AAD4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -122,13 +164,56 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A16EE0AC2221DDA300E79D8A /* CalibratePoint.psd in Resources */,
+				A16EE0AB2221DDA300E79D8A /* CalibratePoint.png in Resources */,
+				A16EE0AD2221DDA300E79D8A /* CurrentPoint.png in Resources */,
 				A16EE09D2221D92900E79D8A /* LaunchScreen.storyboard in Resources */,
 				A16EE09A2221D92900E79D8A /* Assets.xcassets in Resources */,
+				A16EE0AA2221DDA300E79D8A /* CurrentPoint.psd in Resources */,
 				A16EE0982221D92900E79D8A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7C9D2E9B30BEBEC5ABC3AAD4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Holo_ADSB_CalibrationApp/Pods-Holo_ADSB_CalibrationApp-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Holo_ADSB_CalibrationApp/Pods-Holo_ADSB_CalibrationApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC328099FAD6268B287A463D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Holo_ADSB_CalibrationApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A16EE08B2221D92900E79D8A /* Sources */ = {
@@ -280,6 +365,7 @@
 		};
 		A16EE0A22221D92900E79D8A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70DC11FEA8BD0B380AB9AAD4 /* Pods-Holo_ADSB_CalibrationApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +384,7 @@
 		};
 		A16EE0A32221D92900E79D8A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 811F880600F498E07741DD82 /* Pods-Holo_ADSB_CalibrationApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
