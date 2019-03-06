@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FOV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Yn-xC-qNb">
-                                <rect key="frame" x="192" y="673" width="33" height="21"/>
+                                <rect key="frame" x="188" y="673" width="33" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -88,25 +88,14 @@
                                 <rect key="frame" x="38" y="637" width="333" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
+                                    <segment title="AUTO"/>
                                     <segment title="MAX"/>
                                     <segment title="40dB"/>
                                     <segment title="30dB"/>
                                     <segment title="20dB"/>
-                                    <segment title="10dB"/>
                                 </segments>
                                 <connections>
                                     <action selector="didChangedGain:" destination="BYZ-38-t0r" eventType="valueChanged" id="X8F-GS-F5p"/>
-                                </connections>
-                            </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="83a-kg-FIL">
-                                <rect key="frame" x="38" y="739" width="141" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="AGC ON"/>
-                                    <segment title="AGC OFF"/>
-                                </segments>
-                                <connections>
-                                    <action selector="didChangedAGC:" destination="BYZ-38-t0r" eventType="valueChanged" id="OYL-gL-4AI"/>
                                 </connections>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17.82" minValue="17.82" maxValue="22" translatesAutoresizingMaskIntoConstraints="NO" id="Mwr-uQ-lD2">
@@ -117,7 +106,7 @@
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZD-OD-7Ip">
-                                <rect key="frame" x="306" y="673" width="65" height="21"/>
+                                <rect key="frame" x="159" y="739" width="65" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -211,24 +211,24 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         let seg:UISegmentedControl = sender as! UISegmentedControl
         switch seg.selectedSegmentIndex {
         case 0:
+            print("AUTO")
+            gainValue = "-10"
+            break
+        case 1:
             print("GAIN MAX")
             gainValue = "MAX"
             break
-        case 1:
+        case 2:
             print("40db")
             gainValue = "40"
             break
-        case 2:
+        case 3:
             print("30db")
             gainValue = "30"
            break
-        case 3:
+        case 4:
             print("20db")
             gainValue = "20"
-            break
-        case 4:
-            print("10db")
-            gainValue = "10"
             break
         default:
             break
