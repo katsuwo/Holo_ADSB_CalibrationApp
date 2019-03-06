@@ -16,7 +16,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var currentMarker :GMSMarker!
     var calibrateMarker :GMSMarker!
     var alt = 0.0;
+    var gainValue:String = "MAX"
+    var agcValue:Bool = true
+    var fov:Float = 17.82
     
+    @IBOutlet weak var FOVLabel: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
     var isFirstDetection:Bool!
     
@@ -29,6 +33,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupMap()
+        FOVLabel.text = NSString(format: "%.2f", fov) as String
     }
     
     override func didReceiveMemoryWarning() {
@@ -151,10 +156,19 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         let calibratePosDic:NSMutableDictionary = NSMutableDictionary()
         calibratePosDic.setValue(calibrateMarker.position.latitude, forKey: "latitude")
         calibratePosDic.setValue(calibrateMarker.position.longitude, forKey: "longitude")
+        
+        let receiverSettingDic:NSMutableDictionary = NSMutableDictionary()
+        receiverSettingDic.setValue(agcValue, forKey: "AGC")
+        receiverSettingDic.setValue(gainValue, forKey: "GAIN")
 
+        let FOVSettingDic:NSMutableDictionary = NSMutableDictionary()
+        FOVSettingDic.setValue(fov, forKey: "FOV")
+        
         let body:NSMutableDictionary = NSMutableDictionary()
         body.setValue(calibratePosDic, forKey: "calibratePosition")
         body.setValue(currentPosDic, forKey: "currentPosition")
+        body.setValue(receiverSettingDic, forKey: "receiverSetting")
+        body.setValue(FOVSettingDic, forKey: "fovSetting")
         postPosition(body: body)
     }
     
@@ -192,6 +206,57 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
             }
         }
     }
+    
+    @IBAction func didChangedGain(_ sender: Any) {
+        let seg:UISegmentedControl = sender as! UISegmentedControl
+        switch seg.selectedSegmentIndex {
+        case 0:
+            print("GAIN MAX")
+            gainValue = "MAX"
+            break
+        case 1:
+            print("40db")
+            gainValue = "40"
+            break
+        case 2:
+            print("30db")
+            gainValue = "30"
+           break
+        case 3:
+            print("20db")
+            gainValue = "20"
+            break
+        case 4:
+            print("10db")
+            gainValue = "10"
+            break
+        default:
+            break
+        }
+    }
+    
+    @IBAction func didChangedFOV(_ sender: Any) {
+        let slider:UISlider = sender as! UISlider
+        fov = slider.value
+        FOVLabel.text = NSString(format: "%.2f", fov) as String
+    }
+    
+    @IBAction func didChangedAGC(_ sender: Any) {
+        let seg:UISegmentedControl = sender as! UISegmentedControl
+        switch seg.selectedSegmentIndex {
+        case 0:
+            print("AGC ON")
+            agcValue = true
+            break
+        case 1:
+            print("AGC OFF")
+            agcValue = false
+            break
+        default:
+            break
+        }
+    }
+    
     
     func post(urlString: String, body: NSDictionary, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) throws {
         let url = URL(string: urlString)
