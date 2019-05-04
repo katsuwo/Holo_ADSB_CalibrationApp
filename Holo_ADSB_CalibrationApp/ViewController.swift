@@ -18,9 +18,14 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var alt = 0.0;
     var gainValue:String = "MAX"
     var agcValue:Bool = true
-    var fov:Float = 17.82
+    var trim:Float = 0.0
+    var forwardCollection:Float = 0.0
+    var altitudeCollection:Float = 0.0
+    var timer: Timer?
+    @IBOutlet weak var TrimLabel: UILabel!
     
-    @IBOutlet weak var FOVLabel: UILabel!
+    @IBOutlet weak var forwardCollectionLabel: UILabel!
+    @IBOutlet weak var altitudeCollectionLabel: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
     var isFirstDetection:Bool!
     
@@ -33,7 +38,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupMap()
-        FOVLabel.text = NSString(format: "%.2f", fov) as String
+        TrimLabel.text = NSString(format: "%.2f", trim) as String
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,7 +80,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         self.locationManager.startUpdatingLocation()
     }
 
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .restricted:
@@ -161,14 +165,11 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         receiverSettingDic.setValue(agcValue, forKey: "AGC")
         receiverSettingDic.setValue(gainValue, forKey: "GAIN")
 
-        let FOVSettingDic:NSMutableDictionary = NSMutableDictionary()
-        FOVSettingDic.setValue(fov, forKey: "FOV")
         
         let body:NSMutableDictionary = NSMutableDictionary()
         body.setValue(calibratePosDic, forKey: "calibratePosition")
         body.setValue(currentPosDic, forKey: "currentPosition")
         body.setValue(receiverSettingDic, forKey: "receiverSetting")
-        body.setValue(FOVSettingDic, forKey: "fovSetting")
         postPosition(body: body)
     }
     
@@ -207,56 +208,80 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
     }
     
-    @IBAction func didChangedGain(_ sender: Any) {
-        let seg:UISegmentedControl = sender as! UISegmentedControl
-        switch seg.selectedSegmentIndex {
-        case 0:
-            print("AUTO")
-            gainValue = "-10"
-            break
-        case 1:
-            print("GAIN MAX")
-            gainValue = "MAX"
-            break
-        case 2:
-            print("40db")
-            gainValue = "40"
-            break
-        case 3:
-            print("30db")
-            gainValue = "30"
-           break
-        case 4:
-            print("20db")
-            gainValue = "20"
-            break
-        default:
-            break
+    @objc func sendCalibrationOrTrim(tim: Timer) {
+        let info = tim.userInfo as! Dictionary<String, Any>
+        guard let urlString = info["url"] as? String else {
+            return
+        }
+        do {
+            try get(urlString:urlString,  completionHandler: { data, response, error in
+                if data != nil{
+                    self.dataPrint(data: data!)
+                    let resp_dict = self.dataToJson(d: data!)
+                    let resp_code:Int = resp_dict["statusCode"] as! Int
+                    
+                    if resp_code == 200 {
+                        print("SEND SUCESS")
+                    }
+                    else {
+                        DispatchQueue.main.async {
+                            self.showAlert(msg: "Failed", title: "Calibration data send failed.")
+                        }
+                    }
+                }
+                else {
+                    DispatchQueue.main.async {
+                        self.showAlert(msg: "Failed", title: "Server is not responeded.")
+                    }
+                }
+            })
+        }
+        catch {
+            DispatchQueue.main.async {
+                self.showAlert(msg: "Failed", title: "error.")
+            }
         }
     }
     
-    @IBAction func didChangedFOV(_ sender: Any) {
+    func get(urlString: String, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) throws {
+        let url = URL(string: urlString)
+        print(url)
+        var request: URLRequest = URLRequest(url: url!)
+        let session : URLSession = URLSession.shared
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        session.dataTask(with: request, completionHandler: completionHandler).resume()
+    }
+    
+    @IBAction func didChangedTrim(_ sender: Any) {
         let slider:UISlider = sender as! UISlider
-        fov = slider.value
-        FOVLabel.text = NSString(format: "%.2f", fov) as String
+        trim = slider.value
+        TrimLabel.text = NSString(format: "%.2f", trim) as String
+        let userInfo :Dictionary<String, Any> = ["url": String(format:"http://192.168.10.88:5000/Trim/%d", Int(trim))];
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(sendCalibrationOrTrim), userInfo: userInfo, repeats: false)
     }
+
     
-    @IBAction func didChangedAGC(_ sender: Any) {
-        let seg:UISegmentedControl = sender as! UISegmentedControl
-        switch seg.selectedSegmentIndex {
-        case 0:
-            print("AGC ON")
-            agcValue = true
-            break
-        case 1:
-            print("AGC OFF")
-            agcValue = false
-            break
-        default:
-            break
-        }
+    @IBAction func didChangedForwardCollection(_ sender: Any) {
+        let slider:UISlider = sender as! UISlider
+        forwardCollection = slider.value
+        forwardCollectionLabel.text = NSString(format: "%.2fm", forwardCollection) as String
+        let userInfo :Dictionary<String, Any> = ["url": String(format:"http://192.168.10.88:5000/correction/forward/%d", Int(forwardCollection))];
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(sendCalibrationOrTrim), userInfo: userInfo, repeats: false)
     }
-    
+
+    @IBAction func didChangedAltitudeCollection(_ sender: Any) {
+        let slider:UISlider = sender as! UISlider
+        altitudeCollection = slider.value
+        altitudeCollectionLabel.text = NSString(format: "%.2fm", altitudeCollection) as String
+        let userInfo :Dictionary<String, Any> = ["url": String(format:"http://192.168.10.88:5000/correction/altitude/%d", Int(altitudeCollection))];
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(sendCalibrationOrTrim), userInfo: userInfo, repeats: false)
+    }
+
     
     func post(urlString: String, body: NSDictionary, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) throws {
         let url = URL(string: urlString)
@@ -268,7 +293,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         request.httpBody = try JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions.prettyPrinted)
         session.dataTask(with: request, completionHandler: completionHandler).resume()
     }
-
+    
     func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
         print("DRAG");
     }
