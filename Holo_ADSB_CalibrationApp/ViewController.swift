@@ -258,7 +258,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         let slider:UISlider = sender as! UISlider
         trim = slider.value
         TrimLabel.text = NSString(format: "%.2f", trim) as String
-        let userInfo :Dictionary<String, Any> = ["url": String(format:"http://192.168.10.88:5000/trim/%d", Int(trim))];
+        let userInfo :Dictionary<String, Any> = ["url": String(format:"http://192.168.10.88:5000/trim/%.2f", trim)];
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(sendCalibrationOrTrim), userInfo: userInfo, repeats: false)
     }
