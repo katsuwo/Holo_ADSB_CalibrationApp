@@ -18,12 +18,13 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     var alt = 0.0;
     var gainValue:String = "MAX"
     var agcValue:Bool = true
-    var trim:Float = 0.0
+    var h_trim:Float = 0.0
+    var v_trim:Float = 0.0
     var forwardCollection:Float = 0.0
     var altitudeCollection:Float = 0.0
     var timer: Timer?
-    @IBOutlet weak var TrimLabel: UILabel!
-    
+    @IBOutlet weak var h_TrimLabel: UILabel!
+    @IBOutlet weak var v_TrimLabel: UILabel!
     @IBOutlet weak var forwardCollectionLabel: UILabel!
     @IBOutlet weak var altitudeCollectionLabel: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
@@ -38,7 +39,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupMap()
-        TrimLabel.text = NSString(format: "%.2f", trim) as String
+        h_TrimLabel.text = NSString(format: "%.2f", h_trim) as String
     }
     
     override func didReceiveMemoryWarning() {
@@ -114,21 +115,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         alt = loc.altitude
     }
     
-    @IBAction func didChangedMapType(_ sender: Any) {
-        let seg:UISegmentedControl = sender as! UISegmentedControl
-        switch seg.selectedSegmentIndex {
-        case 0:
-            print("SATELLITE")
-            mapView.mapType = .satellite
-            break
-        case 1:
-            print("NORMAL")
-            mapView.mapType = .normal
-            break
-        default:
-            break
-        }
-    }
     
     @IBAction func didChangedSelection(_ sender: Any) {
         let seg:UISegmentedControl = sender as! UISegmentedControl
@@ -148,9 +134,7 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         }
     }
     
-    @IBAction func didChangedUpdate(_ sender: Any) {
-    }
-    
+
     @IBAction func didPushedUpdateNow(_ sender: Any) {
         let currentPosDic:NSMutableDictionary = NSMutableDictionary()
         currentPosDic.setValue(currentMarker.position.latitude, forKey: "latitude")
@@ -254,11 +238,20 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         session.dataTask(with: request, completionHandler: completionHandler).resume()
     }
     
-    @IBAction func didChangedTrim(_ sender: Any) {
+    @IBAction func didChangedVTrimValue(_ sender: Any) {
         let slider:UISlider = sender as! UISlider
-        trim = slider.value
-        TrimLabel.text = NSString(format: "%.2f", trim) as String
-        let userInfo :Dictionary<String, Any> = ["url": String(format:"http://192.168.10.88:5000/trim/%.2f", trim)];
+        v_trim = slider.value
+        v_TrimLabel.text = NSString(format: "%.2f", v_trim) as String
+        let userInfo :Dictionary<String, Any> = ["url": String(format:"http://192.168.10.88:5000/vtrim/%.2f", v_trim)];
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(sendCalibrationOrTrim), userInfo: userInfo, repeats: false)
+    }
+
+    @IBAction func didChangedHTrimValue(_ sender: Any) {
+        let slider:UISlider = sender as! UISlider
+        h_trim = slider.value
+        h_TrimLabel.text = NSString(format: "%.2f", h_trim) as String
+        let userInfo :Dictionary<String, Any> = ["url": String(format:"http://192.168.10.88:5000/htrim/%.2f", h_trim)];
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(sendCalibrationOrTrim), userInfo: userInfo, repeats: false)
     }
